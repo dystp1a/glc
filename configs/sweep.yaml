@@ -1,0 +1,9 @@
+# Gate-threshold sweep and evaluation settings
+taus: [0.0, 0.2, 0.35, 0.5, 0.65, 0.8, 1.01]   # 0.0 = everything exact, 1.01 = everything compressed
+tolerance_es: 0.02          # chosen tau = most compression with val edit-sim >= full_context - tolerance
+max_new_tokens: 48
+n_val_sweep: 150
+n_test: 250                 # reduce (>=200) if eval runs long
+test_sweep: false           # also sweep tau on the test set (slower)
+bootstrap_samples: 1000
+results_dir: results

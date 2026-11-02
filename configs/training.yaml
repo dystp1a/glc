@@ -1,0 +1,31 @@
+seed: 0
+epochs: 1
+grad_accum: 8
+lr_compressor: 3.0e-4
+lr_lora: 1.0e-4
+weight_decay: 0.01
+warmup_steps: 10
+max_grad_norm: 1.0
+grad_checkpointing: true
+amp: true                    # fp16 autocast + GradScaler on CUDA
+log_every: 5                 # optimizer steps
+eval_every: 25               # optimizer steps (validation loss)
+val_examples: 50
+save_every: 25
+patience: 6                  # early stopping, in evaluations
+# routing used to build hybrid training sequences
+train_tau_range: [0.2, 0.8]  # tau ~ U(lo, hi) per example, applied to precomputed gate scores
+p_all_compress: 0.2          # with this prob. compress every chunk (keeps compressor trained on all chunk types)
+val_tau: 0.5
+gate:
+  epochs: 200
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  patience: 20
+  batch_size: 256
+paths:
+  gate_ckpt: checkpoints/gate.pt
+  compressor_ckpt: checkpoints/compressor.pt
+  lora_dir: checkpoints/lora
+  train_state: checkpoints/train_state.pt
+  log_csv: logs/train_log.csv

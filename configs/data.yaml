@@ -1,0 +1,15 @@
+# Data preparation (CrossCodeEval, Python subset, official release)
+raw_dir: data/raw/crosscodeeval_data/python
+processed_dir: data/processed
+rg1_file: line_completion_rg1_unixcoder_cosine_sim.jsonl        # realistic retrieval (system + baselines)
+oracle_file: line_completion_oracle_unixcoder_cosine_sim.jsonl  # reference-peeking retrieval (extra upper bound)
+max_chunks: 5            # top-scoring cross-file chunks kept per example
+chunk_tokens: 256        # each chunk truncated to this many tokens
+left_tokens: 512         # tail of the current file kept as live context
+max_target_tokens: 64
+train_max_tokens: 2048   # drop training examples whose total length exceeds this
+split:                   # split BY REPOSITORY (no repo appears in two splits)
+  n_test: 250
+  n_val: 150
+  n_train: 1000
+  seed: 0

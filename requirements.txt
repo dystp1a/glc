@@ -1,0 +1,14 @@
+# Kaggle already ships torch; `pip install -r requirements.txt` adds the rest.
+# Tested (CPU smoke test) with: torch 2.14, transformers 5.22, peft 0.21. transformers>=4.46 should also work.
+torch>=2.1
+transformers>=4.46
+peft>=0.13
+tree-sitter>=0.22
+tree-sitter-python>=0.21
+pyyaml
+tqdm
+numpy
+pandas
+matplotlib
+gradio>=4.0   # demo only
+tabulate

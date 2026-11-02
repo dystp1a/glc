@@ -1,0 +1,17 @@
+# Model / architecture configuration
+base_model: Qwen/Qwen2.5-Coder-1.5B   # 1.5B fits a Kaggle T4 (16 GB) in fp16
+dtype: float16                         # T4 has no bf16
+attn_implementation: sdpa              # PyTorch SDPA (no flash-attn: not needed, painful on Windows/T4)
+
+k: 4                                   # summary vectors per compressed block
+compressor:
+  n_heads: 8
+  max_block_len: 320                   # >= chunk_tokens + header tokens
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, k_proj, v_proj, o_proj]
+gate:
+  hidden: 64                           # 2 hidden layers of width 64
+  dropout: 0.1
